@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "ES5",
+        "noImplicitAny": true,
+        "moduleResolution": "Node",
+        "outDir": "./dist",
+        "declaration": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/"]
+        }
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+}
