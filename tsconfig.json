@@ -3,7 +3,7 @@
         "module": "commonjs",
         "target": "ES5",
         "noImplicitAny": true,
-        "moduleResolution": "Node",
+        "moduleResolution": "node",
         "outDir": "./dist",
         "declaration": true,
         "removeComments": true,
@@ -11,7 +11,8 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["src/"]
-        }
+        },
+        // "esModuleInterop": true         // 不添加 import fs from 'fs' 会报错, error TS2305: Module '"fs"' has no exported member 'fs'.
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules"]
