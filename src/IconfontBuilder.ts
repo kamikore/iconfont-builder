@@ -22,11 +22,6 @@ interface IconfontBuilderResult {
     font: string
 
     /**
-     * icon CSS
-     */
-    icon: string
-
-    /**
      * 压缩后的 CSS
      */
     compress: string
@@ -109,6 +104,12 @@ export default class IconfontBuilder {
         closeSync(fd);
 
         console.log(`生成成功：${filePath}\n`)
+
+
+        return Promise.resolve({
+            font: fontFace,
+            compress: compressStyle
+        })
 
     }
 
