@@ -34,6 +34,8 @@ export default class IconfontBuilder {
         第一个元素process.argv[0]——返回启动Node.js进程的可执行文件所在的绝对路径
         第二个元素process.argv[1]——为当前执行的JavaScript文件路径
         剩余的元素为其他命令行参数
+    但针对不同情况可能需要做出调整，例如链接中带有空格会导致参数路径获取缺失，也要考虑如果传入多个参数的情况。
+    此时可能就需要限定默认只能有一个参数传入
     */
     private static url = process.argv[2];
 
@@ -51,21 +53,39 @@ export default class IconfontBuilder {
             return;
         }
 
-        // 读取样式内容
-        const style: string = await axios.get(`https:${this.url}`).then(res => res.data);
+        // 请求到的样式内容
+        const style: string = await axios.get(`https:${this.url}`)
+            .then(res => res.data)
+            .catch(error => {
+                console.log("资源获取失败",error.message)                 
+            });
 
-        // 匹配样式内字体文件url（仅保留 woff 格式字体 ???）
-        const reg: RegExp = /url\('(.*)'\) format\('(.*)'\)/g
+        if(!style) {
+            console.log("链接资源为空！！")
+            return;
+        };
 
-        // 由于exec(), test() 匹配成功都会更新regExp.lastIndex，并且在无法匹配时将lastIndex置0，这会导致while死循环。 match 不返回捕获数组不适用
+        // 正则：匹配样式内字体文件url（仅保留 woff 格式字体 ???）
+        const reg: RegExp = /url\('(.*)'\) format\('(.*)'\)/g;
+
+        /* 
+            由于exec(), test() 匹配成功都会更新regExp.lastIndex，并且在无法匹配时将lastIndex置0，这会导致while死循环。 
+            exec()返回一个结果数组或 null,而match() 不返回捕获数组不适用[Melkor (Romulo Mancin)] The Naughty in-Law Part 3 - Preludes & Triptych
+
+         */
         let result, fontsList: Array<fontUrl> = [];    // 记录本次匹配结果
-        while ((result = reg.exec(style)) != null) {
+        while ((result = reg.exec(style)) != null) {   
             fontsList.push({
                 url: result[1],
                 format: result[2],
             })
         }
-
+        
+        // 没有匹配结果
+        if( !fontsList && fontsList.length === 0 ) {
+            console.log('字体链接读取失败！！');
+            return;
+        }
         console.log("字体Url", fontsList);
 
         // 获取字体文件内容
