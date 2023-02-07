@@ -2,7 +2,7 @@ import axios from "axios";
 import postcss from "postcss";
 import cssnano = require('cssnano');
 
-
+// "esModuleInterop": true     支持 import fs from 'fs' 写法
 import { openSync, writeSync, closeSync } from "node:fs";
 
 import { resolve } from "node:path";
