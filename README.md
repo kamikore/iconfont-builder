@@ -13,7 +13,7 @@
 
 # 导入⚙️
 ```javascript
-import IconfontBuilder from 'iconfont-builder'
+import IconfontBuilder from '@kamikore/iconfont-builder'
 ```
 
 # 如何使用 ❔
