@@ -17,13 +17,13 @@ import IconfontBuilder from '@kamikore/iconfont-builder'
 ```
 
 # 如何使用 ❔
-1. 新建一个iconfont.js文件，例如 `src/dev/iconfont.js`
+1. 新建一个iconfont.js文件，例如 `src/dev/iconfont.js`，添加如下内容：
 ```javascript
 import path from 'path'
 import IconfontBuilder from 'iconfont-builder'
 
 /* 
-  配置输出路径（如果build没有传入路径参数，默认输出到当前文件所在文件夹）
+  配置输出路径（如果build没有传入路径参数，默认输出当前执行node命令时候的文件夹地址 ——工作目录）
 */
 IconfontBuilder.build(path.resolve(__dirname, 'iconfont.css'))  
 ```

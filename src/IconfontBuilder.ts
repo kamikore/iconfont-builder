@@ -41,11 +41,10 @@ export default class IconfontBuilder {
 
     /**
      * 构建iconfont css，并输出文件到指定路径
-     * @param {string} filePath 可选，文件输出路径（默认为__dirname/iconfont.css）
+     * @param {string} filePath 可选，文件输出路径（默认为当前执行node命令时候的文件夹地址 ——工作目录）
      * @returns 
      */
-    public static async build(filePath: string = resolve(__dirname, 'iconfont.css')): Promise<IconfontBuilderResult> {
-        console.log("执行参数", process.argv);
+    public static async build(filePath: string = resolve(process.cwd(), 'iconfont.css')): Promise<IconfontBuilderResult> {
 
         if (!this.url) {
             console.error("请输入 iconfont 链接 ！！");
@@ -106,7 +105,6 @@ export default class IconfontBuilder {
 
         // 添加修饰符'g'，为了除去匹配返回数组的附加属性
         const newStyle: string = style.replace(/@font-face {(.*?)}/gs, fontFace)
-        console.log(newStyle);
 
         // css 压缩
 
