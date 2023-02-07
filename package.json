@@ -1,5 +1,5 @@
 {
-  "name": "iconfont-builder",
+  "name": "@kamikore/iconfont-builder",
   "version": "0.0.0",
   "description": "将iconfont的字体文件转码并混合样式，统一压缩生成 iconfont.css",
   "packageManager": "pnpm@7.18.2",
