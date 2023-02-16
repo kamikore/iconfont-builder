@@ -1,4 +1,5 @@
 # iconfont-builder
+> npm仓库地址：https://www.npmjs.com/package/@kamikore/iconfont-builder
 
 一个iconfont 样式生成器
 
