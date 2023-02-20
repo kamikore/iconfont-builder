@@ -113,7 +113,8 @@ export default class IconfontBuilder {
             console.log("postcss处理结果", result);
             return result.css;
         })
-
+        
+        try {
         // 写入文件
         const fd: number = openSync(filePath, 'w');         // 返回值为表示文件描述符的整数, 'w' 表示以写入模式打开(如果文件不存在，会创建新的文件,但如果嵌套了不存在文件夹仍会报错)
 
@@ -122,7 +123,10 @@ export default class IconfontBuilder {
         closeSync(fd);
 
         console.log(`生成成功：${filePath}\n`)
-
+        }
+        catch(e) {
+            console.log("写文件失败",e.message)
+        }
 
         return Promise.resolve({
             font: fontFace,
